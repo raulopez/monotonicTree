@@ -117,12 +117,3 @@ insert_attributes <- function(pruned,confidence,importance,leaf,metric){
   write(paste("instancesPerLeaf = ",leaf,sep=""),file=name_file,append = TRUE)
 
 }
-#' download and unzip jar
-descargar_jar <- function(){
-  
-  dir.create(file.path(system.file(package = "monotonicTree"), "download"))
-  path <- file.path(system.file(package = "monotonicTree"), "download","JarFiles.zip")
-  downloader::download(url="https://github.com/raulopez/monotonicTree/raw/master/jar/JarFiles.zip",destfile = path, mode ="wb")
-  unzip(zipfile = path, exdir = file.path(system.file(package = "monotonicTree"), "download"))
-  
-}

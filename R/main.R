@@ -23,7 +23,7 @@
      metrics <- "MID"
     
      # 1 Descargar ficheros jar
-    descargar_jar()
+    
     
     # 2 Crear dataset train keel
     path_train <- create_dataset(data_train,0,label_class)
@@ -50,7 +50,7 @@
     resultado <- ver_resultados()
     
     # 7º Borrra ficheros Jar
-    unlink(paste0(getwd(),"/download"),force = TRUE,recursive = TRUE)
+    unlink(file.path(system.file(package = "monotonicTree"), "download"),force = TRUE,recursive = TRUE)
     
     resultado$decision_tree <- NULL
     return(resultado)
