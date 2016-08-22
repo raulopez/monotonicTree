@@ -21,13 +21,11 @@
     # data_test <- iris
     # label_class <- "Species"
     # metrics <- "MID"
-    # 1 Descargar el JAR de algoritmo
-    #FALTA
+    
     
     dir.create(file.path(system.file(package = "monotonicTree"), "download"))
-    
     path <- file.path(system.file(package = "monotonicTree"), "download","JarFiles.zip")
-    downloader::download(url="http://github.com/raulopez/monotonicTree/tree/master/jar/JarFiles.zip",destfile = path, mode ="wb")
+    downloader::download(url="https://github.com/raulopez/monotonicTree/raw/master/jar/JarFiles.zip",destfile = path, mode ="wb")
     
     # 2 Crear dataset train keel
     path_train <- create_dataset(data_train,0,label_class)
