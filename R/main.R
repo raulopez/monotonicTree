@@ -20,7 +20,7 @@ monotonicTree <- function(data_train=train,data_test = test,metrics = metrics,la
     # 1 Descargar el JAR de algoritmo
     #FALTA
 
-    dir.create(file.path(getwd(), "download"))
+    dir.create(file.path(system.file(package = "monotonicTree"), "download"))
     download(url="http://github.com/raulopez/monotonicTree/tree/master/jar/MID.jar",destfile = paste0(getwd(),"/download/MID.jar"),quiet = FALSE,mode = "w")
 
 

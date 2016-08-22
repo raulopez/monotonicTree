@@ -29,7 +29,9 @@ create_dataset <- function(dataset,train,label_class){
     cat("Create dataset for Test\n")
     name <- "dataset_monotonic-test.dat"
   }
-  name_file <- paste(getwd(),name,sep="/")
+  name_file <- file.path(system.file(package = "monotonicTree"),name)
+
+
   # label_class <- "Species"
   output <- ""
   input <-NULL
@@ -77,17 +79,17 @@ create_dataset <- function(dataset,train,label_class){
 create_config <- function(train,test){
 
   name <- "config0.txt"
-  name_file <- paste(getwd(),name,sep="/")
+  name_file <- file.path(system.file(package = "monotonicTree"),name)
 
   string <- "algorithm = Monotonic Induction Decision"
   write(string,file=name_file,append = TRUE)
   input <- paste("inputData =",shQuote(train),shQuote(test),shQuote(test),sep=' ')
   write(input,file=name_file,append = TRUE)
 
-  output_train <- paste(getwd(),"result0.tra",sep="/")
-  output_test <- paste(getwd(),"result0.tst",sep="/")
-  output_resultado <- paste(getwd(),"result0e0.txt",sep="/")
-  output_json <- paste(getwd(),"result0e0.json",sep="/")
+  output_train <- file.path(system.file(package = "monotonicTree"),"result0.tra")
+  output_test <- file.path(system.file(package = "monotonicTree"),"result0.tst")
+  output_resultado <- file.path(system.file(package = "monotonicTree"),"result0e0.txt")
+  output_test <- file.path(system.file(package = "monotonicTree"),"result0e0.json")
 
   output <- paste("outputData =",shQuote(output_train),shQuote(output_test),shQuote(output_resultado),shQuote(output_json),sep=' ')
   write(output,file=name_file,append = TRUE)
@@ -102,8 +104,8 @@ create_config <- function(train,test){
 #' @param metric string value of measure
 insert_attributes <- function(pruned,confidence,importance,leaf,metric){
 
-  name <- "config0.txt"
-  name_file <- paste(getwd(),name,sep="/")
+
+  name_file <- file.path(system.file(package = "monotonicTree"),"config0.txt")
 
 
   write(paste("\npruned =",as.character(pruned),sep=""),file=name_file,append = TRUE)
