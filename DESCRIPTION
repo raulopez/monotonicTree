@@ -10,6 +10,7 @@ Description: build decision trees that have the constraints of monotonic data.
     the value of class.
 Imports:
     jsonlite
+    downloader
 LazyData: TRUE
 License: GPL-2
 RoxygenNote: 5.0.1
