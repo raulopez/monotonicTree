@@ -1,0 +1,15 @@
+Package: monotonicTree
+Type: Package
+Title: Build decision tree with monotonic methrics
+Version: 1.0
+Author: Raul Lopez Jimenez [aut,cre]
+Authors@R: person("Raul", "Lopez Jimenez", email = "rulopez@correo.ugr.es",role = c("aut", "cre"))
+Maintainer: Raul Lopez Jimenez <rulopez@correo.ugr.es>
+Description: build decision trees that have the constraints of monotonic data.
+    If you increase or decrease the value of an attribute, also increase
+    the value of class.
+Imports:
+    jsonlite
+LazyData: TRUE
+License: GPL-2
+RoxygenNote: 5.0.1
