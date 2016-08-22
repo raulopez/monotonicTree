@@ -2,4 +2,5 @@
 
 export(decision_tree)
 export(monotonicTree)
+import(downloader)
 import(jsonlite)

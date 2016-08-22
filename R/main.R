@@ -26,7 +26,7 @@
     
     dir.create(file.path(system.file(package = "monotonicTree"), "download"))
     
-    path <- file.path(system.file(package = "monotonicTree"), "jar","JarFiles.zip")
+    path <- file.path(system.file(package = "monotonicTree"), "download","JarFiles.zip")
     downloader::download(url="http://github.com/raulopez/monotonicTree/tree/master/jar/JarFiles.zip",destfile = path, mode ="wb")
     
     # 2 Crear dataset train keel
