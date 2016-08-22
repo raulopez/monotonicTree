@@ -20,12 +20,10 @@
     # data_train <- iris
     # data_test <- iris
     # label_class <- "Species"
-    # metrics <- "MID"
+     metrics <- "MID"
     
-    
-    dir.create(file.path(system.file(package = "monotonicTree"), "download"))
-    path <- file.path(system.file(package = "monotonicTree"), "download","JarFiles.zip")
-    downloader::download(url="https://github.com/raulopez/monotonicTree/raw/master/jar/JarFiles.zip",destfile = path, mode ="wb")
+     # 1 Descargar ficheros jar
+    descargar_jar()
     
     # 2 Crear dataset train keel
     path_train <- create_dataset(data_train,0,label_class)
@@ -40,9 +38,12 @@
     insert_attributes(TRUE,0.25,1,2,metrics)
     
     # 5 Ejecutar código
+    if(metrics == "MID"){
+      jar <- "MID.jar"
+    }
     
-    jar <- shQuote(gsub("/","\\\\",paste(getwd(),"jar/MID.jar",sep = "/"),perl=TRUE))
-    config <- shQuote(gsub("/","\\\\",paste(getwd(),"config0.txt",sep = "/"),perl=TRUE))
+    jar <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"), "download",jar),perl=TRUE))
+    config <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"), "config0.txt"),perl=TRUE))
     # ejecutar(jar,config)
     
     # 6º Mostrar Resultado
