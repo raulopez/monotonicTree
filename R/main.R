@@ -17,10 +17,10 @@
     stop("downloader package needed for this function to work. Please install it.",call. = FALSE)
   }
   else{
-    # data_train <- iris
-    # data_test <- iris
-    # label_class <- "Species"
-     metrics <- "MID"
+    data_train <- iris
+    data_test <- iris
+    label_class <- "Species"
+    metrics <- "MID"
     
      # 1 Descargar ficheros jar
     
