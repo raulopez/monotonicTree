@@ -24,7 +24,7 @@
     # monotonicTree(iris,iris,"MID","Species")
     
      # 1 Descargar ficheros jar
-    
+    descargar_jar()
     
     # 2 Crear dataset train keel
     path_train <- create_dataset(data_train,0,label_class)
@@ -45,7 +45,7 @@
     
     jar <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"), "download",jar),perl=TRUE))
     config <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"),"files","config0.txt"),perl=TRUE))
-    cat("Run Algorithm\n")
+    
     ejecutar(jar,config)
     
     # 6º Mostrar Resultado
@@ -56,7 +56,7 @@
     unlink(file.path(system.file(package = "monotonicTree"), "files"),force = TRUE,recursive = TRUE)    
     
     resultado$decision_tree <- NULL
-    cat("Finished\n")
+    cat("\n[ok] Finished\n")
     return(resultado)
   }
   

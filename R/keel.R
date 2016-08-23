@@ -4,7 +4,7 @@
 #' @param jar      jar path.
 #' @param config   config path.
 ejecutar <- function(jar,config){
-
+  cat("[6] Run Algorithm\n")
   ejecutar <- paste("java -jar",jar,config,sep=" ")
   #cat(ejecutar)
   system(ejecutar,intern = FALSE,show.output.on.console = FALSE)
@@ -22,11 +22,11 @@ ejecutar <- function(jar,config){
 create_dataset <- function(dataset,train,label_class){
 
   if(train == 0){
-    cat("Create dataset for Train\n")
+    cat("[4] Create dataset for Train\n")
     name <- "dataset_monotonic-tra.dat"
   }
   else{
-    cat("Create dataset for Test\n")
+    cat("[5] Create dataset for Test\n")
     name <- "dataset_monotonic-test.dat"
   }
   name_file <- file.path(system.file(package = "monotonicTree"),"files",name)
@@ -116,4 +116,19 @@ insert_attributes <- function(pruned,confidence,importance,leaf,metric){
 
   write(paste("instancesPerLeaf = ",leaf,sep=""),file=name_file,append = TRUE)
 
+}
+
+#' download files necessary for the package work
+descargar_jar <- function(){
+  # cat("==================================================================\n")
+  cat("[1] Create folder\n")
+  dir.create(file.path(system.file(package = "monotonicTree"), "download"),showWarnings = FALSE)
+  dir.create(file.path(system.file(package = "monotonicTree"), "files"),showWarnings = FALSE)
+  cat("[2] Download JAR\n\n")
+  path <- file.path(system.file(package = "monotonicTree"), "download","JarFiles.zip")
+  downloader::download(url="https://github.com/raulopez/monotonicTree/raw/master/jar/JarFiles.zip",destfile = path, mode ="wb")
+  cat("[3] Unzip files\n")
+  unzip(zipfile = path, exdir = file.path(system.file(package = "monotonicTree"), "download"))
+  # cat("==================================================================\n")
+  
 }
