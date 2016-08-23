@@ -17,10 +17,11 @@
     stop("downloader package needed for this function to work. Please install it.",call. = FALSE)
   }
   else{
-    data_train <- iris
-    data_test <- iris
-    label_class <- "Species"
-    metrics <- "MID"
+    # data_train <- iris
+    # data_test <- iris
+    # label_class <- "Species"
+    # metrics <- "MID"
+    # monotonicTree(iris,iris,"MID","Species")
     
      # 1 Descargar ficheros jar
     
@@ -43,16 +44,19 @@
     }
     
     jar <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"), "download",jar),perl=TRUE))
-    config <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"), "config0.txt"),perl=TRUE))
-    # ejecutar(jar,config)
+    config <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"),"files","config0.txt"),perl=TRUE))
+    cat("Run Algorithm\n")
+    ejecutar(jar,config)
     
     # 6º Mostrar Resultado
     resultado <- ver_resultados()
     
     # 7º Borrra ficheros Jar
     unlink(file.path(system.file(package = "monotonicTree"), "download"),force = TRUE,recursive = TRUE)
+    unlink(file.path(system.file(package = "monotonicTree"), "files"),force = TRUE,recursive = TRUE)    
     
     resultado$decision_tree <- NULL
+    cat("Finished\n")
     return(resultado)
   }
   

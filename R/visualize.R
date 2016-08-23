@@ -13,13 +13,13 @@ ver_resultados <- function(){
 #' read result
 #' @return print decision_tree
 #' @export
-decision_tree <- function(){
+monotonic_tree <- function(){
 
-  path_json <- paste(getwd(),"result0e0.json",sep="/")
+  path_json <- file.path(system.file(package = "monotonicTree"),"result0e0.json")
   # cat(path_json)
   if(file.exists(path_json)){
     mydf <- jsonlite::fromJSON(path_json)
-    lapply(mydf$decision_tree,function(x){cat(x)})
+    o <- lapply(mydf$decision_tree,function(x){cat(x)})
   }else{
 
     cat("[X]ERROR: Decision tree no exists\n")

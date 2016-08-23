@@ -6,8 +6,8 @@
 ejecutar <- function(jar,config){
 
   ejecutar <- paste("java -jar",jar,config,sep=" ")
-  cat(ejecutar)
-  system(ejecutar,intern = FALSE)
+  #cat(ejecutar)
+  system(ejecutar,intern = FALSE,show.output.on.console = FALSE)
   #show.output.on.console = FALSE
 }
 
@@ -29,7 +29,7 @@ create_dataset <- function(dataset,train,label_class){
     cat("Create dataset for Test\n")
     name <- "dataset_monotonic-test.dat"
   }
-  name_file <- file.path(system.file(package = "monotonicTree"),name)
+  name_file <- file.path(system.file(package = "monotonicTree"),"files",name)
 
 
   # label_class <- "Species"
@@ -79,17 +79,17 @@ create_dataset <- function(dataset,train,label_class){
 create_config <- function(train,test){
 
   name <- "config0.txt"
-  name_file <- file.path(system.file(package = "monotonicTree"),name)
+  name_file <- file.path(system.file(package = "monotonicTree"),"files",name)
 
   string <- "algorithm = Monotonic Induction Decision"
   write(string,file=name_file,append = TRUE)
   input <- paste("inputData =",shQuote(train),shQuote(test),shQuote(test),sep=' ')
   write(input,file=name_file,append = TRUE)
 
-  output_train <- file.path(system.file(package = "monotonicTree"),"result0.tra")
-  output_test <- file.path(system.file(package = "monotonicTree"),"result0.tst")
-  output_resultado <- file.path(system.file(package = "monotonicTree"),"result0e0.txt")
-  output_test <- file.path(system.file(package = "monotonicTree"),"result0e0.json")
+  output_train <- file.path(system.file(package = "monotonicTree"),"files","result0.tra")
+  output_test <- file.path(system.file(package = "monotonicTree"),"files","result0.tst")
+  output_resultado <- file.path(system.file(package = "monotonicTree"),"files","result0e0.txt")
+  output_json <- file.path(system.file(package = "monotonicTree"),"result0e0.json")
 
   output <- paste("outputData =",shQuote(output_train),shQuote(output_test),shQuote(output_resultado),shQuote(output_json),sep=' ')
   write(output,file=name_file,append = TRUE)
@@ -105,7 +105,7 @@ create_config <- function(train,test){
 insert_attributes <- function(pruned,confidence,importance,leaf,metric){
 
 
-  name_file <- file.path(system.file(package = "monotonicTree"),"config0.txt")
+  name_file <- file.path(system.file(package = "monotonicTree"),"files","config0.txt")
 
 
   write(paste("\npruned =",as.character(pruned),sep=""),file=name_file,append = TRUE)
