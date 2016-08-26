@@ -39,9 +39,19 @@
     insert_attributes(TRUE,0.25,1,2,metrics)
     
     # 5 Ejecutar código
-    if(metrics == "MID"){
-      jar <- "MID.jar"
-    }
+  
+    switch(metrics, 
+       MID={
+         jar <- "MID.jar"
+       },
+       RMI={
+         jar <- "RMI.jar"
+       },
+       {
+         cat("Metrics no valid\n")
+         return(0)
+       }
+    )
     
     jar <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"), "download",jar),perl=TRUE))
     config <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"),"files","config0.txt"),perl=TRUE))
