@@ -17,9 +17,9 @@
     stop("downloader package needed for this function to work. Please install it.",call. = FALSE)
   }
   else{
-    # data_train <- iris
-    # data_test <- iris
-    # label_class <- "Species"
+    # data_train <- df_esl
+    # data_test <- df_esl
+    # label_class <- "Out"
     # metrics <- "MID"
     # monotonicTree(iris,iris,"MID","Species")
     

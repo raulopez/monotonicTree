@@ -9,5 +9,5 @@
 
 }
 .onAttach <- function(libname = find.package("monotonicTree"), pkgname = "monotonicTree") {
-  packageStartupMessage("Welcome to my package")
+  packageStartupMessage("Monotonic Tree package")
 }

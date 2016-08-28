@@ -3,12 +3,14 @@
 #'
 #' @param jar      jar path.
 #' @param config   config path.
+#' @export
 ejecutar <- function(jar,config){
   cat("[6] Run Algorithm\n")
   ejecutar <- paste("java -jar",jar,config,sep=" ")
-  #cat(ejecutar)
-  system(ejecutar,intern = FALSE,show.output.on.console = FALSE)
+  cat(ejecutar)
+  system(ejecutar,intern = TRUE,show.output.on.console = FALSE)
   #show.output.on.console = FALSE
+  cat("FIN ejecucion\n")
 }
 
 #' create new dataset for use in keel
@@ -17,15 +19,17 @@ ejecutar <- function(jar,config){
 #' @param train   if dataset is train (train=0) or test (train=1).
 #' @param label_class   class attribute of dataset
 #' @return file path
-
+#' @export
 #CREAR DATASET CON FORMATO KEEL
 create_dataset <- function(dataset,train,label_class){
+# train <- 0
+# dataset <- df_esl
+# label_class <- "Out"
 
   if(train == 0){
     cat("[4] Create dataset for Train\n")
     name <- "dataset_monotonic-tra.dat"
-  }
-  else{
+  }else{
     cat("[5] Create dataset for Test\n")
     name <- "dataset_monotonic-test.dat"
   }
@@ -37,6 +41,7 @@ create_dataset <- function(dataset,train,label_class){
   input <-NULL
   string <- "@relation dataset monotonic"
   write(string,file=name_file,append = TRUE)
+
   for(i in 1:length(names(dataset))){
 
     if(names(dataset)[i]!=label_class){
@@ -45,19 +50,29 @@ create_dataset <- function(dataset,train,label_class){
     else{
       output <- names(dataset)[i]
     }
-    if(class(dataset[1,i])=="numeric"){
+    line <- NULL
+    if(class(dataset[1,])=="numeric"){
+      
       head <- paste("@attribute",names(dataset)[i],"real",sep=" ")
       interval <- paste("[",min(dataset[,i]),", ",max(dataset[,i]),"]",sep = "")
       line <- paste(head,interval,sep =" ")
-    }
-    else if(class(dataset[1,i])=="factor"){
+      
+    }else if(class(dataset[1,i])=="integer"){
+      
+      head <- paste("@attribute",names(dataset)[i],"integer",sep=" ")
+      interval <- paste("[",min(dataset[,i]),", ",max(dataset[,i]),"]",sep = "")
+      line <- paste(head,interval,sep =" ")
+      
+    }else if(class(dataset[1,i])=="factor"){
       head <- paste("@attribute",names(dataset)[i],sep=" ")
       level <- paste(levels(dataset[,5]),collapse=", ")
       interval <- paste("{",level,"}",sep = "")
       line <- paste(head,interval,sep =" ")
     }
-
-    write(line,file=name_file,append = TRUE)
+    if(!is.null(line)){
+      write(line,file=name_file,append = TRUE)  
+    }
+    
   }
 
   label_input <- paste(input,collapse=", ")
@@ -76,6 +91,7 @@ create_dataset <- function(dataset,train,label_class){
 #'
 #' @param train dataset train path
 #' @param test dataset test path
+#' @export
 create_config <- function(train,test){
 
   name <- "config0.txt"
@@ -102,6 +118,7 @@ create_config <- function(train,test){
 #' @param importance for MID measure value of importance
 #' @param leaf number of instances for leaf
 #' @param metric string value of measure
+#' @export
 insert_attributes <- function(pruned,confidence,importance,leaf,metric){
 
 
@@ -119,6 +136,7 @@ insert_attributes <- function(pruned,confidence,importance,leaf,metric){
 }
 
 #' download files necessary for the package work
+#' @export
 descargar_jar <- function(){
   # cat("==================================================================\n")
   cat("[1] Create folder\n")
