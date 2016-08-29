@@ -7,10 +7,10 @@
 ejecutar <- function(jar,config){
   cat("[6] Run Algorithm\n")
   ejecutar <- paste("java -jar",jar,config,sep=" ")
-  cat(ejecutar)
+  # cat(ejecutar)
   system(ejecutar,intern = TRUE,show.output.on.console = FALSE)
   #show.output.on.console = FALSE
-  cat("FIN ejecucion\n")
+  cat("\nFIN ejecucion\n")
 }
 
 #' create new dataset for use in keel
@@ -51,7 +51,15 @@ create_dataset <- function(dataset,train,label_class){
       output <- names(dataset)[i]
     }
     line <- NULL
-    if(class(dataset[1,])=="numeric"){
+    
+    if(names(dataset)[i] == label_class && (class(dataset[1,i])=="numeric" || class(dataset[1,i])=="integer")){
+      head <- paste("@attribute",names(dataset)[i],sep=" ")
+      level <- paste(seq(min(dataset[,i]),max(dataset[,i])),collapse = ",")
+      interval <- paste("{",level,"}",sep = "")
+      line <- paste(head,interval,sep =" ")
+    }
+    
+    else if(class(dataset[1,i])=="numeric"){
       
       head <- paste("@attribute",names(dataset)[i],"real",sep=" ")
       interval <- paste("[",min(dataset[,i]),", ",max(dataset[,i]),"]",sep = "")

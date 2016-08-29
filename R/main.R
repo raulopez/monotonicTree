@@ -20,7 +20,7 @@
     # data_train <- df_esl
     # data_test <- df_esl
     # label_class <- "Out"
-    # metrics <- "MID"
+    # metrics <- "RMI"
     # monotonicTree(iris,iris,"MID","Species")
     
      # 1 Descargar ficheros jar
@@ -62,8 +62,8 @@
     resultado <- ver_resultados()
     
     # 7º Borrra ficheros Jar
-    unlink(file.path(system.file(package = "monotonicTree"), "download"),force = TRUE,recursive = TRUE)
-    unlink(file.path(system.file(package = "monotonicTree"), "files"),force = TRUE,recursive = TRUE)    
+    # unlink(file.path(system.file(package = "monotonicTree"), "download"),force = TRUE,recursive = TRUE)
+    # unlink(file.path(system.file(package = "monotonicTree"), "files"),force = TRUE,recursive = TRUE)    
     
     resultado$decision_tree <- NULL
     cat("\n[ok] Finished\n")
