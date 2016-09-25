@@ -36,7 +36,7 @@
     create_config(path_train,path_test)
     
     # Pruned,confidence,importante,leaf,
-    insert_attributes(TRUE,0.25,1,2,metrics)
+    insert_attributes(TRUE,0.25,10,2,metrics)
     
     # 5 Ejecutar código
   
