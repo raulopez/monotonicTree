@@ -52,6 +52,7 @@
        },
        RSD={
          jar <- "RSD.jar"
+         cat(jar)
        },
        RGD={
          jar <- "RGD.jar"
@@ -60,11 +61,11 @@
          stop("Metrics no valid\n",call. = FALSE)
        }
     )
-    
-    jar <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"), "download",jar),perl=TRUE))
+    cat(jar)
+    path_jar <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"), "download",jar),perl=TRUE))
     config <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"),"files","config0.txt"),perl=TRUE))
     
-    ejecutar(jar,config)
+    ejecutar(path_jar,config)
     
     # 6º Mostrar Resultado
     resultado <- ver_resultados()
