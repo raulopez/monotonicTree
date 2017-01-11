@@ -90,7 +90,8 @@ loadDatasetMonotonic <- function(name = "era"){
   cat("[3] Unzip files\n")
   unzip(zipfile = path, exdir = file.path(system.file(package = "monotonicTree"), "dataset"))
   
-  dataset <- load(file.path(system.file(package = "monotonicTree"), "dataset",name))
+  datasetname <- "era"
+  dataset <- load(file.path(system.file(package = "monotonicTree"), "dataset","esl.rdata"))
   
   
 }
