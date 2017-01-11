@@ -129,6 +129,7 @@ insert_attributes <- function(pruned,confidence,importance = 10,leaf,metric,porc
   if(class(pruned) != "logical"){
     stop("PRUNED not logical value",call. = FALSE)
   }
+  write(paste("\nPruned = ",as.character(pruned),sep=""),file=name_file,append = TRUE)
   
   if(confidence > 1) confidence <- 1
   if(confidence < 0) confidence <- 0
