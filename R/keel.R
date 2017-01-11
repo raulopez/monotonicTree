@@ -20,9 +20,7 @@ ejecutar <- function(jar,config){
 #' @return file path
 #CREAR DATASET CON FORMATO KEEL
 create_dataset <- function(dataset,train,label_class){
-# train <- 0
-# dataset <- df_esl
-# label_class <- "Out"
+
 
   if(train == 0){
     cat("[4] Create dataset for Train\n")
@@ -34,7 +32,6 @@ create_dataset <- function(dataset,train,label_class){
   name_file <- file.path(system.file(package = "monotonicTree"),"files",name)
 
 
-  # label_class <- "Species"
   output <- ""
   input <-NULL
   string <- "@relation dataset monotonic"

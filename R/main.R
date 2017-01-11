@@ -24,11 +24,6 @@
   if(class(data_test) != "data.frame"){
       stop("data_train must be data.frame",call. = FALSE)
   }
-    # data_train <- df_esl
-    # data_test <- df_esl
-    # label_class <- "Out"
-    # metrics <- "RMI"
-    # monotonicTree(iris,iris,"MID","Species")
     
      # 1 Descargar ficheros jar
     descargar_jar()
@@ -55,9 +50,14 @@
        RMI={
          jar <- "RMI.jar"
        },
+       RSD={
+         jar <- "RSD.jar"
+       },
+       RGD={
+         jar <- "RGD.jar"
+       },
        {
-         cat("Metrics no valid\n")
-         return(0)
+         stop("Metrics no valid\n",call. = FALSE)
        }
     )
     
