@@ -3,7 +3,6 @@
 #'
 #' @param jar      jar path.
 #' @param config   config path.
-#' @export
 ejecutar <- function(jar,config){
   cat("[6] Run Algorithm\n")
   ejecutar <- paste("java -jar",jar,config,sep=" ")
@@ -19,7 +18,6 @@ ejecutar <- function(jar,config){
 #' @param train   if dataset is train (train=0) or test (train=1).
 #' @param label_class   class attribute of dataset
 #' @return file path
-#' @export
 #CREAR DATASET CON FORMATO KEEL
 create_dataset <- function(dataset,train,label_class){
 # train <- 0
@@ -99,7 +97,6 @@ create_dataset <- function(dataset,train,label_class){
 #'
 #' @param train dataset train path
 #' @param test dataset test path
-#' @export
 create_config <- function(train,test){
 
   name <- "config0.txt"
@@ -123,28 +120,34 @@ create_config <- function(train,test){
 #'
 #' @param pruned if pruned tree (pruned=TRUE) or not pruned tree (pruned=FALSE)
 #' @param confidence value of confidence
-#' @param importance for MID measure value of importance
+#' @param importance double for MID measure value of importance [0,1]
 #' @param leaf number of instances for leaf
 #' @param metric string value of measure
-#' @export
-insert_attributes <- function(pruned,confidence,importance,leaf,metric){
+#' @param porcentage double [0,1] value for porcentage of pruning. 0 mean model 100% monotonic, 1 mean no pruning
+insert_attributes <- function(pruned,confidence,importance = 10,leaf,metric,porcentage){
 
 
   name_file <- file.path(system.file(package = "monotonicTree"),"files","config0.txt")
 
-
-  write(paste("\npruned =",as.character(pruned),sep=""),file=name_file,append = TRUE)
+  if(class(pruned) != "logical"){
+    stop("PRUNED not logical value",call. = FALSE)
+  }
+  
+  if(confidence > 1) confidence <- 1
+  if(confidence < 0) confidence <- 0
   write(paste("confidence = ",as.character(confidence),sep=""),file=name_file,append = TRUE)
+  
   if(metric == "MID"){
     write(paste("relative_importance_monotonicity =",as.character(importance),sep=""),file=name_file,append = TRUE)
   }
-
   write(paste("instancesPerLeaf = ",leaf,sep=""),file=name_file,append = TRUE)
-
+  
+  if(porcentage > 1) porcentage <- 1
+  if(porcentage < 0) porcentage <- 0
+  write(paste("porcentage_antimonotonic = ",as.character(porcentage),sep=""),file=name_file,append = TRUE)
 }
 
 #' download files necessary for the package work
-#' @export
 descargar_jar <- function(){
   # cat("==================================================================\n")
   cat("[1] Create folder\n")

@@ -7,7 +7,9 @@
   #' @import jsonlite
   #' @import downloader
   #' @export
-  monotonicTree <- function(data_train=train,data_test = test,metrics = metrics,label_class = label_class){
+  monotonicTree <- function(data_train= train,data_test = test,metrics = metrics,label_class = label_class, 
+                            pruned = TRUE, confidence = 0.25, pruning_factor = 0,
+                            importance_monotonicity = 10){
     
   #Librerias y archivos
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
@@ -16,7 +18,12 @@
   if (!requireNamespace("downloader", quietly = TRUE)) {
     stop("downloader package needed for this function to work. Please install it.",call. = FALSE)
   }
-  else{
+  if(class(data_train) != "data.frame"){
+    stop("data_train must be data.frame",call. = FALSE)
+  }
+  if(class(data_test) != "data.frame"){
+      stop("data_train must be data.frame",call. = FALSE)
+  }
     # data_train <- df_esl
     # data_test <- df_esl
     # label_class <- "Out"
@@ -36,7 +43,8 @@
     create_config(path_train,path_test)
     
     # Pruned,confidence,importante,leaf,
-    insert_attributes(TRUE,0.25,10,2,metrics)
+    
+    insert_attributes(pruned,confidence,importance_monotonicity,2,metrics,pruning_factor)
     
     # 5 Ejecutar código
   
@@ -68,8 +76,7 @@
     resultado$decision_tree <- NULL
     cat("\n[ok] Finished\n")
     return(resultado)
-  }
-  
+
 }
 
 
