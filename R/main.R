@@ -80,5 +80,18 @@
 
 }
 
-
+loadDatasetMonotonic <- function(name = "era"){
+  # cat("==================================================================\n")
+  cat("[1] Create folder\n")
+  dir.create(file.path(system.file(package = "monotonicTree"), "dataset"),showWarnings = FALSE)
+  cat("[2] Download Dataset\n\n")
+  path <- file.path(system.file(package = "monotonicTree"), "dataset","dataset.zip")
+  downloader::download(url="https://github.com/raulopez/monotonicTree/raw/master/data/dataset.zip",destfile = path, mode ="wb")
+  cat("[3] Unzip files\n")
+  unzip(zipfile = path, exdir = file.path(system.file(package = "monotonicTree"), "dataset"))
+  
+  dataset <- load(file.path(system.file(package = "monotonicTree"), "dataset",name))
+  
+  
+}
 
