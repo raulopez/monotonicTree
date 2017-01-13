@@ -16,12 +16,11 @@ ver_resultados <- function(){
 monotonic_tree <- function(){
 
   path_json <- file.path(system.file(package = "monotonicTree"),"result0e0.json")
-  # cat(path_json)
+  cat(path_json)
   if(file.exists(path_json)){
     mydf <- jsonlite::fromJSON(path_json)
     o <- lapply(mydf$decision_tree,function(x){cat(x)})
   }else{
-
     cat("[X]ERROR: Decision tree no exists\n")
   }
 }
