@@ -3,7 +3,7 @@
 #'
 #' @param jar      jar path.
 #' @param config   config path.
-ejecutar <- function(jar,config){
+execute <- function(jar,config){
   cat("[6] Run Algorithm\n")
   ejecutar <- paste("java -jar",jar,config,sep=" ")
   # cat(ejecutar)
@@ -146,7 +146,7 @@ insert_attributes <- function(pruned,confidence,importance = 10,leaf,metric,porc
 }
 
 #' download files necessary for the package work
-descargar_jar <- function(){
+download_jar <- function(){
   # cat("==================================================================\n")
   cat("[1] Create folder\n")
   dir.create(file.path(system.file(package = "monotonicTree"), "download"),showWarnings = FALSE)

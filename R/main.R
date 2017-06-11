@@ -11,7 +11,7 @@
                             pruned = TRUE, confidence = 0.25, pruning_factor = 0,
                             importance_monotonicity = 10){
     
-  #Librerias y archivos
+  #Check library and input format
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
     stop("jsonlite package needed for this function to work. Please install it.",call. = FALSE)
   }
@@ -25,24 +25,23 @@
       stop("data_train must be data.frame",call. = FALSE)
   }
     
-     # 1 Descargar ficheros jar
+     # 1 Download jar file
     descargar_jar()
     
-    # 2 Crear dataset train keel
+    # 2 Create dataset train keel
     path_train <- create_dataset(data_train,0,label_class)
     
-    # 3 Crear dataset test keel
+    # 3 Create dataset test keel
     path_test <- create_dataset(data_test,1,label_class)
     
-    # 4 Crear fichero config
+    # 4 Create config file
     create_config(path_train,path_test)
     
     # Pruned,confidence,importante,leaf,
     
     insert_attributes(pruned,confidence,importance_monotonicity,2,metrics,pruning_factor)
     
-    # 5 Ejecutar código
-  
+    # 5 Execute
     switch(metrics, 
        MID={
          jar <- "MID.jar"
@@ -61,18 +60,17 @@
          stop("Metrics no valid\n",call. = FALSE)
        }
     )
-    cat(jar)
     path_jar <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"), "download",jar),perl=TRUE))
     config <- shQuote(gsub("/","\\\\",file.path(system.file(package = "monotonicTree"),"files","config0.txt"),perl=TRUE))
+   
+    execute(path_jar,config)
     
-    ejecutar(path_jar,config)
-    
-    # 6º Mostrar Resultado
-    resultado <- ver_resultados()
+    # 6º return result
+    resultado <- result()
     
     # 7º Borrra ficheros Jar
-    # unlink(file.path(system.file(package = "monotonicTree"), "download"),force = TRUE,recursive = TRUE)
-    # unlink(file.path(system.file(package = "monotonicTree"), "files"),force = TRUE,recursive = TRUE)    
+     unlink(file.path(system.file(package = "monotonicTree"), "download"),force = TRUE,recursive = TRUE)
+     unlink(file.path(system.file(package = "monotonicTree"), "files"),force = TRUE,recursive = TRUE)    
     
     resultado$decision_tree <- NULL
     cat("\n[ok] Finished\n")
